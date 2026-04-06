@@ -13,7 +13,7 @@ Inside any project folder, open Claude Code and run:
 ## Usage
 
 ```
-/ripple:setup-ripple
+/ripple-plugin:setup-ripple
 ```
 
 Claude will detect your project state and guide you through the full setup — new project, existing project, or broken install.
