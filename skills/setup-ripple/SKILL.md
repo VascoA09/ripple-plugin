@@ -46,7 +46,7 @@ import App from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div data-theme="light" style={{ minHeight: '100svh' }}>
+    <div data-theme="light">
       <App />
     </div>
   </StrictMode>
@@ -68,50 +68,61 @@ body { margin: 0; font-family: var(--font-family-base); color: var(--text); back
 
 ### src/App.tsx — replace with working starter
 ```tsx
-import { Button, Input, Tag, Badge, Card, CardHeader, CardTitle, CardContent } from '@ripple/ui'
+import { StandardNavigation, Unit4Logo, Button, Input, Tag, Badge, Card, CardHeader, CardTitle, CardContent } from '@ripple/ui'
+import { LayoutDashboard } from 'lucide-react'
 import ripplePkg from '../node_modules/@ripple/ui/package.json'
 
 export default function App() {
   return (
-    <div style={{
-      minHeight: '100svh',
-      background: 'var(--bg-app)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 'var(--spacing-100)',
-      padding: 'var(--spacing-200)',
-    }}>
-      <div style={{ textAlign: 'center' }}>
-        <h1 className="typography-heading-l" style={{ margin: 0 }}>Welcome to Ripple</h1>
-        <p className="typography-body" style={{ margin: '4px 0 0', color: 'var(--text-soft)' }}>Unit4's design system for product UI</p>
+    <StandardNavigation
+      nav={{
+        logo: <Unit4Logo />,
+        productName: 'My App',
+        globalNavItems: [
+          { id: 'home', label: 'Home', icon: <LayoutDashboard size={20} />, selected: true, onClick: () => {} },
+        ],
+      }}
+    >
+      <div style={{
+        display:        'flex',
+        flexDirection:  'column',
+        alignItems:     'center',
+        justifyContent: 'center',
+        minHeight:      '100%',
+        gap:            'var(--spacing-100)',
+        padding:        'var(--spacing-200)',
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--spacing-75)', textAlign: 'center' }}>
+          <Unit4Logo width={74} height={42} />
+          <h1 className="typography-heading-l" style={{ margin: 0 }}>Welcome to Ripple</h1>
+          <p className="typography-body" style={{ margin: 0, color: 'var(--text-soft)' }}>Unit4's design system for product UI</p>
+        </div>
+
+        <Card style={{ width: '100%', maxWidth: '400px' }}>
+          <CardHeader>
+            <CardTitle as="h2">Get started</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-150)' }}>
+              <Input label="Email" placeholder="you@example.com" />
+              <div style={{ display: 'flex', gap: 'var(--spacing-50)' }}>
+                <Button variant="fill">Primary</Button>
+                <Button variant="outline">Secondary</Button>
+              </div>
+              <div style={{ display: 'flex', gap: 'var(--spacing-50)', alignItems: 'center' }}>
+                <Tag color="blue">Design</Tag>
+                <Tag color="green">System</Tag>
+                <Badge color="primary">3</Badge>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <p className="typography-caption" style={{ margin: 0 }}>
+          @ripple/ui v{ripplePkg.version}
+        </p>
       </div>
-
-      <Card style={{ width: '100%', maxWidth: '400px' }}>
-        <CardHeader>
-          <CardTitle as="h2">Get started</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-150)' }}>
-            <Input label="Email" placeholder="you@example.com" />
-            <div style={{ display: 'flex', gap: 'var(--spacing-50)' }}>
-              <Button variant="fill">Primary</Button>
-              <Button variant="outline">Secondary</Button>
-            </div>
-            <div style={{ display: 'flex', gap: 'var(--spacing-50)', alignItems: 'center' }}>
-              <Tag color="blue">Design</Tag>
-              <Tag color="green">System</Tag>
-              <Badge color="primary">3</Badge>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <p className="typography-caption" style={{ margin: 0 }}>
-        @ripple/ui v{ripplePkg.version}
-      </p>
-    </div>
+    </StandardNavigation>
   )
 }
 ```
