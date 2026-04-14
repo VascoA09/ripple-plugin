@@ -22,7 +22,7 @@ Check the current directory:
 ```bash
 npm create vite@latest . -- --template react-ts
 npm install --legacy-peer-deps
-npm install github:VascoA09/Ripple --legacy-peer-deps
+npm install https://github.com/VascoA09/Ripple --legacy-peer-deps
 ```
 
 **If the user wants a new folder created**, ask for a project name then run:
@@ -31,7 +31,7 @@ npm install github:VascoA09/Ripple --legacy-peer-deps
 npm create vite@latest [project-name] -- --template react-ts
 cd [project-name]
 npm install --legacy-peer-deps
-npm install github:VascoA09/Ripple --legacy-peer-deps
+npm install https://github.com/VascoA09/Ripple --legacy-peer-deps
 ```
 
 Then make these file changes:
@@ -132,7 +132,7 @@ export default function App() {
 ## Flow B — Existing project
 
 ```bash
-npm install github:VascoA09/Ripple --legacy-peer-deps
+npm install https://github.com/VascoA09/Ripple --legacy-peer-deps
 ```
 
 Then:
@@ -155,7 +155,7 @@ Then:
 Check that `node_modules/@ripple/ui/dist/style.css` exists.
 
 - If yes: report the version from `node_modules/@ripple/ui/package.json` and confirm ready.
-- If no: the install is broken. Run `npm cache clean --force && npm install github:VascoA09/Ripple --legacy-peer-deps`.
+- If no: the install is broken. Run `npm cache clean --force && npm install https://github.com/VascoA09/Ripple --legacy-peer-deps`.
 
 ---
 

@@ -1,0 +1,8 @@
+{
+  "name": "ripple-plugin",
+  "description": "Set up the Ripple design system (@ripple/ui) in a React/TypeScript project",
+  "author": {
+    "name": "Vasco Antunes",
+    "email": "vasco@unit4.com"
+  }
+}
