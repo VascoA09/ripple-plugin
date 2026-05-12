@@ -18,7 +18,7 @@ The plugin is installed once per machine. Open a terminal in your project folder
 ## Usage
 
 ```
-/ripple-plugin:setup-ripple
+/ripple-plugin:ripple
 ```
 
 Claude will detect your project state and walk you through the appropriate setup flow.

@@ -1,5 +1,5 @@
 ---
-name: setup-ripple
+name: ripple
 description: Sets up @ripple/ui (Unit4's Ripple design system) in the current project. Use when the user wants to install Ripple, scaffold a new Ripple project, add Ripple to an existing project, or fix a broken Ripple installation.
 ---
 
