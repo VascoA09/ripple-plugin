@@ -1,5 +1,7 @@
 # ripple-plugin
 
+![version](https://img.shields.io/badge/version-1.0.0-blue)
+
 A [Claude Code](https://claude.ai/code) plugin that sets up [@ripple/ui](https://github.com/VascoA09/Ripple) — Unit4's Ripple design system — in any project.
 
 ## Requirements
