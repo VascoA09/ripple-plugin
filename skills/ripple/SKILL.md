@@ -5,6 +5,17 @@ description: Sets up @ripple/ui (Unit4's Ripple design system) in the current pr
 
 Set up the Ripple design system (@ripple/ui) in the current project.
 
+**Install the plugin (once per machine):**
+```
+claude plugin marketplace add VascoA09/ripple-plugin
+claude plugin install ripple-plugin
+```
+
+**Invoke:**
+```
+/ripple-plugin:ripple
+```
+
 ## Step 1 — Detect context
 
 Check the current directory:
