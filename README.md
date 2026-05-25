@@ -11,10 +11,11 @@ A [Claude Code](https://claude.ai/code) plugin that sets up [@ripple/ui](https:/
 
 ## Install
 
-The plugin is installed once per machine. Open a terminal in your project folder, start Claude Code, and run:
+The plugin is installed once per machine. Run these two commands in your terminal:
 
 ```
-/plugin install github:VascoA09/ripple-plugin
+claude plugin marketplace add VascoA09/ripple-plugin
+claude plugin install ripple-plugin
 ```
 
 ## Usage
