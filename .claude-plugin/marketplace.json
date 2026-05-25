@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ripple-plugin",
+  "description": "Unit4 Ripple design system plugin for Claude Code",
+  "owner": {
+    "name": "Vasco Antunes",
+    "email": "vasco@unit4.com"
+  },
+  "plugins": [
+    {
+      "name": "ripple-plugin",
+      "description": "Set up the Ripple design system (@ripple/ui) in a React/TypeScript project",
+      "author": {
+        "name": "Vasco Antunes"
+      },
+      "category": "design",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/VascoA09/ripple-plugin.git",
+        "path": ".",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/VascoA09/ripple-plugin"
+    }
+  ]
+}
