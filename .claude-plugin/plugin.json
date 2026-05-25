@@ -1,7 +1,6 @@
 {
   "name": "ripple-plugin",
-  "version": "1.0.0",
-  "description": "Set up the Ripple design system (@ripple/ui) in a React/TypeScript project",
+  "description": "Set up the Ripple design system (@ripple/ui) in a React/TypeScript project, or generate a self-contained HTML prototype using Ripple's look and feel — no coding required",
   "author": {
     "name": "Vasco Antunes",
     "email": "vasco@unit4.com"

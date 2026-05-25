@@ -1,22 +1,22 @@
 ---
 name: ripple
-description: Sets up @ripple/ui (Unit4's Ripple design system) in the current project. Use when the user wants to install Ripple, scaffold a new Ripple project, add Ripple to an existing project, or fix a broken Ripple installation.
+description: Sets up @ripple/ui (Unit4's Ripple design system) in the current project, or generates a self-contained HTML prototype using Ripple tokens. Use when the user wants to install Ripple, scaffold a new Ripple project, add Ripple to an existing project, fix a broken Ripple installation, or create an HTML prototype with the Ripple design system.
 ---
 
-Set up the Ripple design system (@ripple/ui) in the current project.
+Set up the Ripple design system (@ripple/ui) in the current project, or create a standalone HTML prototype.
 
-**Install the plugin (once per machine):**
-```
-claude plugin marketplace add VascoA09/ripple-plugin
-claude plugin install ripple-plugin
-```
+## Step 0 — Ask intent first
 
-**Invoke:**
-```
-/ripple-plugin:ripple
-```
+Before doing anything, ask:
 
-## Step 1 — Detect context
+> "Are you a **developer** setting up Ripple in a React project, or do you want to create a **quick HTML prototype** using Ripple's look and feel — no coding required?"
+
+- **Developer** → continue to Step 1 (React flows)
+- **HTML prototype** → skip to Flow D
+
+---
+
+## Step 1 — Detect context (developer path only)
 
 Check the current directory:
 
@@ -170,31 +170,158 @@ Check that `node_modules/@ripple/ui/dist/style.css` exists.
 
 ---
 
-### tsconfig.app.json — ensure resolveJsonModule is enabled
-After scaffolding, check `tsconfig.app.json`. If `resolveJsonModule` is not present under `compilerOptions`, add it:
-```json
-{
-  "compilerOptions": {
-    "resolveJsonModule": true
-  }
-}
+## Flow D — HTML prototype (no coding required)
+
+This flow is for non-developers who want a ready-to-open HTML file that looks like a real Ripple UI.
+
+### Step D1 — Understand what they want to prototype
+
+Ask ONE question:
+
+> "What would you like to prototype? For example: a login page, a dashboard, a form, a list view, a settings screen — or describe what you have in mind."
+
+Wait for the answer before proceeding.
+
+### Step D2 — Fetch the Ripple CSS
+
+Fetch the compiled Ripple stylesheet and embed it inline in the HTML so the file is fully self-contained and works without internet access.
+
+Fetch from:
 ```
-This is required for importing `package.json` to display the Ripple version.
+https://raw.githubusercontent.com/VascoA09/Ripple/main/dist/style.css
+```
+
+If that fails, try:
+```
+https://cdn.jsdelivr.net/gh/VascoA09/Ripple@main/dist/style.css
+```
+
+If both fail, embed a minimal set of Ripple-compatible CSS variables as a fallback (see Fallback tokens below).
+
+### Step D3 — Generate the HTML file
+
+Create a self-contained `.html` file named after the prototype (e.g. `login.html`, `dashboard.html`).
+
+**Required structure:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Prototype name]</title>
+  <style>
+    /* === RIPPLE CSS (embedded) === */
+    [paste fetched CSS here]
+
+    /* === Page reset === */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-family-base); color: var(--text); background: var(--bg-canvas); -webkit-font-smoothing: antialiased; }
+  </style>
+</head>
+<body data-theme="light">
+  <!-- prototype content here -->
+</body>
+</html>
+```
+
+**Key rules for HTML prototypes:**
+- `data-theme="light"` must always be on `<body>`
+- Never define `:root` CSS variables — use only `var(--token-name)` from Ripple
+- Use Ripple spacing tokens for all gaps and padding: `var(--spacing-50)` through `var(--spacing-400)`
+- Use Ripple colour tokens: `var(--text)`, `var(--text-soft)`, `var(--bg-surface)`, `var(--bg-canvas)`, `var(--border)`
+- Use Ripple typography classes where available: `typography-heading-l`, `typography-heading-m`, `typography-body`, `typography-caption`
+- Build UI blocks (buttons, inputs, cards, nav) as plain HTML styled with Ripple tokens — no JavaScript frameworks needed
+
+**Reference HTML patterns for common Ripple components:**
+
+#### Button (fill)
+```html
+<button style="background: var(--color-primary); color: var(--text-on-primary); border: none; border-radius: var(--radius-m); padding: var(--spacing-75) var(--spacing-150); font-family: var(--font-family-base); font-size: var(--font-size-m); cursor: pointer;">
+  Button label
+</button>
+```
+
+#### Button (outline)
+```html
+<button style="background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); border-radius: var(--radius-m); padding: var(--spacing-75) var(--spacing-150); font-family: var(--font-family-base); font-size: var(--font-size-m); cursor: pointer;">
+  Button label
+</button>
+```
+
+#### Input with label
+```html
+<div style="display: flex; flex-direction: column; gap: var(--spacing-25);">
+  <label style="font-size: var(--font-size-s); color: var(--text-soft);">Label</label>
+  <input type="text" placeholder="Placeholder" style="border: 1px solid var(--border); border-radius: var(--radius-m); padding: var(--spacing-75) var(--spacing-100); font-family: var(--font-family-base); font-size: var(--font-size-m); color: var(--text); background: var(--bg-surface); outline: none;" />
+</div>
+```
+
+#### Card
+```html
+<div style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-l); padding: var(--spacing-200);">
+  <h2 class="typography-heading-m" style="margin: 0 0 var(--spacing-100);">Card title</h2>
+  <!-- card content -->
+</div>
+```
+
+#### Top navigation bar
+```html
+<nav style="background: var(--bg-surface); border-bottom: 1px solid var(--border); padding: 0 var(--spacing-200); height: 56px; display: flex; align-items: center; gap: var(--spacing-150);">
+  <span class="typography-heading-m" style="margin: 0;">App name</span>
+  <a href="#" style="color: var(--text-soft); text-decoration: none; font-size: var(--font-size-m);">Home</a>
+  <a href="#" style="color: var(--text-soft); text-decoration: none; font-size: var(--font-size-m);">Settings</a>
+</nav>
+```
+
+#### Tag / badge
+```html
+<span style="background: var(--color-blue-subtle); color: var(--color-blue); border-radius: var(--radius-full); padding: var(--spacing-25) var(--spacing-75); font-size: var(--font-size-s);">Label</span>
+```
+
+### Step D4 — Save and present the file
+
+Save the file to the workspace folder. Then tell the user:
+
+> "Your prototype is ready — just double-click the file to open it in your browser. No installs needed."
 
 ---
 
-## Key rules
+### Fallback tokens (use only if CSS fetch fails)
 
-- Always use `--legacy-peer-deps`
-- CSS import is `@ripple/ui/style.css` — never `@ripple/ui/dist/style.css`
-- `data-theme="light"` is required on the root wrapper
-- `lucide-react` installs automatically with Ripple — no separate install needed
-- Clear Vite template `:root` variables — they override Ripple tokens
+```css
+:root {
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-size-s: 12px; --font-size-m: 14px; --font-size-l: 16px;
+  --text: #1a1a2e; --text-soft: #6b7280; --text-on-primary: #ffffff;
+  --bg-canvas: #f4f5f7; --bg-surface: #ffffff;
+  --border: #e5e7eb;
+  --color-primary: #0f62fe;
+  --color-blue: #0f62fe; --color-blue-subtle: #dbeafe;
+  --color-green: #16a34a; --color-green-subtle: #dcfce7;
+  --radius-m: 6px; --radius-l: 10px; --radius-full: 999px;
+  --spacing-25: 2px; --spacing-50: 4px; --spacing-75: 6px;
+  --spacing-100: 8px; --spacing-150: 12px; --spacing-200: 16px;
+  --spacing-300: 24px; --spacing-400: 32px;
+}
+```
+
+---
+
+## Key rules (all flows)
+
+- Always use `--legacy-peer-deps` (React flows)
+- CSS import is `@ripple/ui/style.css` — never `@ripple/ui/dist/style.css` (React flows)
+- `data-theme="light"` is required on the root wrapper (all flows)
+- `lucide-react` installs automatically with Ripple — no separate install needed (React flows)
+- Clear Vite template `:root` variables — they override Ripple tokens (React flows)
+- Never define `:root` variables in HTML prototypes — use Ripple tokens only (Flow D)
 
 ---
 
 ## Always end with a summary
 
-- What was done (bullet list)
-- Next step: `npm run dev` or `cd [project] && npm run dev`
-- Reminder: "Use Ripple tokens for all styles: `var(--text)`, `var(--bg-surface)`, `var(--spacing-100)`. Full docs: https://github.com/VascoA09/Ripple/blob/main/SETUP.md"
+**React flows:** bullet list of what was done + next step (`npm run dev`) + reminder to use Ripple tokens. Full docs: https://github.com/VascoA09/Ripple/blob/main/SETUP.md
+
+**HTML prototype flow:** confirm the file was saved, tell the user to double-click to open it, and offer to adjust any section or add more screens.
